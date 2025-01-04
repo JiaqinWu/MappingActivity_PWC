@@ -58,7 +58,7 @@ except Exception as e:
 # Streamlit application
 def app():
     # Set up the Streamlit page
-    st.set_page_config(page_title='PWC Mapping Dashboard', page_icon='', layout='wide')
+    #st.set_page_config(page_title='PWC Mapping Dashboard', page_icon='', layout='wide')
 
     # Custom CSS for centering and resizing
     st.markdown("""
