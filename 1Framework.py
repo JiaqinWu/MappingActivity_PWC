@@ -127,7 +127,7 @@ def app():
         st.write("Summary Metrics:")
         col1, col2 = st.columns(2)
         col1.metric("Total Submissions", len(sheet))
-        col2.metric("Unique Agencies", sheet['agency'].nunique())
+        col2.metric("Unique Agencies", sheet['Agency'].nunique())
     
     st.table(sheet)
 
