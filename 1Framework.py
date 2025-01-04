@@ -119,9 +119,25 @@ def app():
             # Append new data to Google Sheet
             updated_sheet = pd.concat([sheet, new_data], ignore_index=True)
             worksheet1.update([updated_sheet.columns.values.tolist()] + updated_sheet.values.tolist())
-            st.success("Your comment has been submitted and Google Sheets updated.")
+            st.success("🎉 Your comment has been submitted and Google Sheets updated.")
         except Exception as e:
             st.error(f"Error updating Google Sheets: {str(e)}")
+
+    if not sheet.empty:
+        st.write("Summary Metrics:")
+        col1, col2 = st.columns(2)
+        col1.metric("Total Submissions", len(sheet))
+        col2.metric("Unique Agencies", sheet['agency'].nunique())
+    
+    st.table(sheet)
+
+    st.markdown("""
+        <footer style="text-align: center; margin-top: 50px;">
+            <p>Developed by Office of Commmunity Safety.</p>
+        </footer>
+    """, unsafe_allow_html=True)
+
+
 
 if __name__ == "__main__":
     app()
