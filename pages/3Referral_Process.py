@@ -93,33 +93,52 @@ def app():
     st.markdown('<div class="title">Referral Process</div>', unsafe_allow_html=True)
 
     # User inputs
-    name = st.text_area("What is your name?", key="name")
-    agency = st.text_area("What is your agency/department?", key="agency")
-    comment1 = st.text_area("What are the six different ways people are currently called into response?", key="comment1")
-    comment2 = st.text_area("Where are the bottlenecks or inefficiencies in the current referral system?", key="comment2")
-    comment3 = st.text_area("How can we ensure that referrals are made with the necessary context and information for all agencies involved?", key="comment3")
-    comment4 = st.text_area("What are the specific roles each agency plays when it comes to referrals?", key="comment4")
-    submit_comment = st.button("Submit Comment", key="submit_comment")
+    with st.expander("Submit Your Response"):
+        # User inputs
+        name = st.text_area("What is your name?", key="name")
+        agency = st.text_area("What is your agency/department?", key="agency")
+        comment1 = st.text_area("What are the six different ways people are currently called into response?", key="comment1")
+        comment2 = st.text_area("Where are the bottlenecks or inefficiencies in the current referral system?", key="comment2")
+        comment3 = st.text_area("How can we ensure that referrals are made with the necessary context and information for all agencies involved?", key="comment3")
+        comment4 = st.text_area("What are the specific roles each agency plays when it comes to referrals?", key="comment4")
+        submit_comment = st.button("Submit Comment", key="submit_comment")
 
-    if submit_comment:
-        # Prepare the new row
-        new_row = {
-            'Name': name, 
-            'Agency': agency, 
-            'What are the six different ways people are currently called into response?': comment1,
-            'Where are the bottlenecks or inefficiencies in the current referral system?': comment2,
-            'How can we ensure that referrals are made with the necessary context and information for all agencies involved?': comment3,
-            "What are the specific roles each agency plays when it comes to referrals?": comment4
-        }
-        new_data = pd.DataFrame([new_row])
+        if submit_comment:
+            # Prepare the new row
+            new_row = {
+                'Name': name, 
+                'Agency': agency, 
+                'What are the six different ways people are currently called into response?': comment1,
+                'Where are the bottlenecks or inefficiencies in the current referral system?': comment2,
+                'How can we ensure that referrals are made with the necessary context and information for all agencies involved?': comment3,
+                "What are the specific roles each agency plays when it comes to referrals?": comment4
+            }
+            new_data = pd.DataFrame([new_row])
 
-        try:
-            # Append new data to Google Sheet
-            updated_sheet = pd.concat([sheet, new_data], ignore_index=True)
-            worksheet1.update([updated_sheet.columns.values.tolist()] + updated_sheet.values.tolist())
-            st.success("Your comment has been submitted and Google Sheets updated.")
-        except Exception as e:
-            st.error(f"Error updating Google Sheets: {str(e)}")
+            try:
+                # Append new data to Google Sheet
+                updated_sheet = pd.concat([sheet, new_data], ignore_index=True)
+                worksheet1.update([updated_sheet.columns.values.tolist()] + updated_sheet.values.tolist())
+                st.success("Your comment has been submitted and Google Sheets updated.")
+            except Exception as e:
+                st.error(f"Error updating Google Sheets: {str(e)}")
+
+    with st.expander("Check the Results"):
+        if not sheet.empty:
+            st.write("Summary Metrics:")
+            col1, col2 = st.columns(2)
+            col1.metric("Total Submissions", len(sheet))
+            col2.metric("Unique Agencies", sheet['Agency'].nunique())
+        
+        st.table(sheet)
+
+    st.markdown("""
+        <footer style="text-align: center; margin-top: 50px;">
+            <p>Developed by Office of Commmunity Safety</p>
+        </footer>
+    """, unsafe_allow_html=True)
+
+
 
 if __name__ == "__main__":
     app()
