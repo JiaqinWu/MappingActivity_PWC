@@ -87,7 +87,7 @@ def app():
 
     # Place the image and title in the columns
     with col2:
-        st.image(image, width=300)
+        st.image(image, width=400)
 
     # Centered title
     st.markdown('<div class="title">Referral Process</div>', unsafe_allow_html=True)
