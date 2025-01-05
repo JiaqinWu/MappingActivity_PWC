@@ -93,47 +93,49 @@ def app():
     st.markdown('<div class="title">Integrated Framework</div>', unsafe_allow_html=True)
 
     # User inputs
-    name = st.text_area("What is your name?", key="name")
-    agency = st.text_area("What is your agency/department?", key="agency")
-    comment1 = st.text_area("How do we define a coordinated response across agencies?", key="comment1")
-    comment2 = st.text_area("What are the key stages in the process (prevention, intervention, crisis, post-crisis)?", key="comment2")
-    comment3 = st.text_area("How do we engage with communities to build resilience?", key="comment3")
-    comment4 = st.text_area("What's the current state of inter-agency collaboration (use dashboard to look at which agencies are 'talking'? Where are the gaps?", key="comment4")
-    comment5 = st.text_area("What processes would help us streamline so that everyone is aligned and working together?", key="comment5")
-    submit_comment = st.button("Submit Comment", key="submit_comment")
+    with st.expander("Submit Your Response"):
+        name = st.text_area("What is your name?", key="name")
+        agency = st.text_area("What is your agency/department?", key="agency")
+        comment1 = st.text_area("How do we define a coordinated response across agencies?", key="comment1")
+        comment2 = st.text_area("What are the key stages in the process (prevention, intervention, crisis, post-crisis)?", key="comment2")
+        comment3 = st.text_area("How do we engage with communities to build resilience?", key="comment3")
+        comment4 = st.text_area("What's the current state of inter-agency collaboration (use dashboard to look at which agencies are 'talking'? Where are the gaps?", key="comment4")
+        comment5 = st.text_area("What processes would help us streamline so that everyone is aligned and working together?", key="comment5")
+        submit_comment = st.button("Submit Comment", key="submit_comment")
 
-    if submit_comment:
-        # Prepare the new row
-        new_row = {
-            'Name': name, 
-            'Agency': agency, 
-            'How do we define a coordinated response across agencies?': comment1,
-            'What are the key stages in the process (prevention, intervention, crisis, post-crisis)?': comment2,
-            'How do we engage with communities to build resilience?': comment3,
-            "What's the current state of inter-agency collaboration (use dashboard to look at which agencies are 'talking'? Where are the gaps?": comment4,
-            "What processes would help us streamline so that everyone is aligned and working together?": comment5
-        }
-        new_data = pd.DataFrame([new_row])
+        if submit_comment:
+            # Prepare the new row
+            new_row = {
+                'Name': name, 
+                'Agency': agency, 
+                'How do we define a coordinated response across agencies?': comment1,
+                'What are the key stages in the process (prevention, intervention, crisis, post-crisis)?': comment2,
+                'How do we engage with communities to build resilience?': comment3,
+                "What's the current state of inter-agency collaboration (use dashboard to look at which agencies are 'talking'? Where are the gaps?": comment4,
+                "What processes would help us streamline so that everyone is aligned and working together?": comment5
+            }
+            new_data = pd.DataFrame([new_row])
 
-        try:
-            # Append new data to Google Sheet
-            updated_sheet = pd.concat([sheet, new_data], ignore_index=True)
-            worksheet1.update([updated_sheet.columns.values.tolist()] + updated_sheet.values.tolist())
-            st.success("🎉 Your comment has been submitted and Google Sheets updated.")
-        except Exception as e:
-            st.error(f"Error updating Google Sheets: {str(e)}")
+            try:
+                # Append new data to Google Sheet
+                updated_sheet = pd.concat([sheet, new_data], ignore_index=True)
+                worksheet1.update([updated_sheet.columns.values.tolist()] + updated_sheet.values.tolist())
+                st.success("🎉 Your comment has been submitted and Google Sheets updated.")
+            except Exception as e:
+                st.error(f"Error updating Google Sheets: {str(e)}")
 
-    if not sheet.empty:
-        st.write("Summary Metrics:")
-        col1, col2 = st.columns(2)
-        col1.metric("Total Submissions", len(sheet))
-        col2.metric("Unique Agencies", sheet['Agency'].nunique())
-    
-    st.table(sheet)
+    with st.expander("Check the Results"):
+        if not sheet.empty:
+            st.write("Summary Metrics:")
+            col1, col2 = st.columns(2)
+            col1.metric("Total Submissions", len(sheet))
+            col2.metric("Unique Agencies", sheet['Agency'].nunique())
+        
+        st.table(sheet)
 
     st.markdown("""
         <footer style="text-align: center; margin-top: 50px;">
-            <p>Developed by Office of Commmunity Safety.</p>
+            <p>Developed by Office of Commmunity Safety</p>
         </footer>
     """, unsafe_allow_html=True)
 
