@@ -82,13 +82,18 @@ def app():
         </style>
     """, unsafe_allow_html=True)
 
-    # Use columns for side-by-side layout
-    col1, col2, col3 = st.columns([2, 3,1])  # Adjust the width ratio as needed
+    # Use columns for side-by-side layout    
+    col1, col2, col3 = st.columns(3)
 
-    # Place the image and title in the columns
+    with col1:
+        st.write(' ')
+
     with col2:
-        st.image(image, width=400)
+        st.image(image, width=350)
 
+    with col3:
+        st.write(' ')
+        
     # Centered title
     st.markdown('<div class="title">Information Sharing and Data Integration</div>', unsafe_allow_html=True)
 
