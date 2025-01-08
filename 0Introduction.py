@@ -10,7 +10,7 @@ image = "PWC.jpg"
 # Streamlit application
 def app():
     # Use columns for side-by-side layout    
-    col1, col2, col3 = st.columns([3,1,12])
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         st.write(' ')
