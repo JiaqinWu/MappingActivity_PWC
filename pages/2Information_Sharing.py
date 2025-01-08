@@ -140,11 +140,11 @@ def app():
     # Footer Section
     st.markdown("""
         <footer>
+            <p>Thank you once again for your participation and attendance!</p>
             <p>Developed by Jiaqin Wu (<a href="mailto:JWu@pwcgov.org">JWu@pwcgov.org</a>) and Dr. Tauheeda Yasin (<a href="mailto:tyasin1@pwcgov.org">tyasin1@pwcgov.org</a>)<br>
             The Office of Community Safety</p>
         </footer>
     """, unsafe_allow_html=True)
-
 
 if __name__ == "__main__":
     app()
