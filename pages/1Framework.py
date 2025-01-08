@@ -60,7 +60,7 @@ def app():
     # Set up the Streamlit page
     #st.set_page_config(page_title='PWC Mapping Dashboard', page_icon='', layout='wide')
 
-    # Custom CSS for centering and resizing
+    # Set up custom CSS for styling
     st.markdown("""
         <style>
             .title {
@@ -69,6 +69,19 @@ def app():
                 font-weight: bold;
                 margin-top: 20px;
                 margin-bottom: 40px;
+            }
+            .content {
+                font-size: 18px;
+                line-height: 1.6;
+                text-align: justify;
+                margin: 0 auto;
+                max-width: 800px;
+            }
+            footer {
+                text-align: center;
+                margin-top: 50px;
+                font-size: 14px;
+                color: #555;
             }
         </style>
     """, unsafe_allow_html=True)
