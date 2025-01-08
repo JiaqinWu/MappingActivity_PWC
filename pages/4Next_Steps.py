@@ -83,17 +83,16 @@ def app():
     """, unsafe_allow_html=True)
 
     # Use columns for side-by-side layout    
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns([3,1,12])
 
     with col1:
         st.write(' ')
 
     with col2:
-        st.image(image, width=350)
+        st.image(image, width=450)
 
     with col3:
         st.write(' ')
-
     # Centered title
     st.markdown('<div class="title">Next Steps & Action Plan</div>', unsafe_allow_html=True)
 
@@ -135,12 +134,13 @@ def app():
         
         st.table(sheet)
 
+    # Footer Section
     st.markdown("""
-        <footer style="text-align: center; margin-top: 50px;">
-            <p>Developed by Office of Commmunity Safety</p>
+        <footer>
+            <p>Developed by Jiaqin Wu (<a href="mailto:JWu@pwcgov.org">JWu@pwcgov.org</a>) and Dr. Tauheeda Yasin (<a href="mailto:tyasin1@pwcgov.org">tyasin1@pwcgov.org</a>)<br>
+            The Office of Community Safety</p>
         </footer>
     """, unsafe_allow_html=True)
-
 
 
 if __name__ == "__main__":

@@ -63,15 +63,6 @@ def app():
     # Custom CSS for centering and resizing
     st.markdown("""
         <style>
-            .logo {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-bottom: 20px;
-            }
-            .logo img {
-                width: 300px; /* Adjust size of the logo */
-            }
             .title {
                 text-align: center;
                 font-size: 36px;
@@ -83,64 +74,77 @@ def app():
     """, unsafe_allow_html=True)
 
     # Use columns for side-by-side layout    
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns([3,1,12])
 
     with col1:
         st.write(' ')
 
     with col2:
-        st.image(image, width=350)
+        st.image(image, width=450)
 
     with col3:
         st.write(' ')
-
     # Centered title
     st.markdown('<div class="title">Integrated Framework</div>', unsafe_allow_html=True)
 
-    # User inputs
-    with st.expander("Submit Your Response"):
+        # Contact Information
+    with st.expander("Contact Information"):
         name = st.text_area("What is your name?", key="name")
         agency = st.text_area("What is your agency/department?", key="agency")
-        comment1 = st.text_area("How do we define a coordinated response across agencies?", key="comment1")
-        comment2 = st.text_area("What are the key stages in the process (prevention, intervention, crisis, post-crisis)?", key="comment2")
-        comment3 = st.text_area("How do we engage with communities to build resilience?", key="comment3")
-        comment4 = st.text_area("What's the current state of inter-agency collaboration (use dashboard to look at which agencies are 'talking'? Where are the gaps?", key="comment4")
+
+    # First Group of Questions
+    with st.expander("Framework and Collaboration"):
+        comment1 = st.text_area("What are your ideas for a framework for coordinated response across agencies?", key="comment1")
+        comment2 = st.text_area("What is the current state and gaps of inter-agency collaboration (use dashboard to look at which agencies are 'talking')?", key="comment2")
+        comment3 = st.text_area("What are the key gaps in the process (prevention, intervention, crisis, post-crisis)?", key="comment3")
+
+    # Second Group of Questions
+    with st.expander("Community Engagement and Processes"):
+        comment4 = st.text_area("What is your idea on engaging with communities to build resilience?", key="comment4")
         comment5 = st.text_area("What processes would help us streamline so that everyone is aligned and working together?", key="comment5")
-        submit_comment = st.button("Submit Comment", key="submit_comment")
+        comment6 = st.text_area("What are your thoughts about information sharing and MOUs?", key="comment6")
+        comment7 = st.text_area("What ways can we improve the referral process?", key="comment7")
 
-        if submit_comment:
-            # Prepare the new row
-            new_row = {
-                'Name': name, 
-                'Agency': agency, 
-                'How do we define a coordinated response across agencies?': comment1,
-                'What are the key stages in the process (prevention, intervention, crisis, post-crisis)?': comment2,
-                'How do we engage with communities to build resilience?': comment3,
-                "What's the current state of inter-agency collaboration (use dashboard to look at which agencies are 'talking'? Where are the gaps?": comment4,
-                "What processes would help us streamline so that everyone is aligned and working together?": comment5
-            }
-            new_data = pd.DataFrame([new_row])
+    # Submit button
+    submit_comment = st.button("Submit Response", key="submit_comment")
 
-            try:
-                # Append new data to Google Sheet
-                updated_sheet = pd.concat([sheet, new_data], ignore_index=True)
-                worksheet1.update([updated_sheet.columns.values.tolist()] + updated_sheet.values.tolist())
-                st.success("🎉 Your comment has been submitted and Google Sheets updated.")
-            except Exception as e:
-                st.error(f"Error updating Google Sheets: {str(e)}")
+    if submit_comment:
+        # Prepare the new row
+        new_row = {
+            "Name": name,
+            "Agency": agency,
+            "What are your ideas for a framework for coordinated response across agencies?": comment1,
+            "What is the current state and gaps of inter-agency collaboration (use dashboard to look at which agencies are 'talking')?": comment2,
+            "What are the key gaps in the process (prevention, intervention, crisis, post-crisis)?": comment3,
+            "What is your idea on engaging with communities to build resilience?": comment4,
+            "What processes would help us streamline so that everyone is aligned and working together?": comment5,
+            "What are your thoughts about information sharing and MOUs?": comment6,
+            "What ways can we improve the referral process?": comment7,
+        }
+        new_data = pd.DataFrame([new_row])
 
-    with st.expander("Check the Results"):
+        try:
+            # Append new data to Google Sheet
+            updated_sheet = pd.concat([sheet, new_data], ignore_index=True)
+            worksheet1.update([updated_sheet.columns.values.tolist()] + updated_sheet.values.tolist())
+            st.success("🎉 Your response has been submitted and Google Sheets updated.")
+        except Exception as e:
+            st.error(f"Error updating Google Sheets: {str(e)}")
+
+
+    with st.expander("See the Results Below"):
         if not sheet.empty:
-            st.write("Summary Metrics:")
             col1, col2 = st.columns(2)
             col1.metric("Total Submissions", len(sheet))
             col2.metric("Unique Agencies", sheet['Agency'].nunique())
         
         st.table(sheet)
 
+    # Footer Section
     st.markdown("""
-        <footer style="text-align: center; margin-top: 50px;">
-            <p>Developed by Office of Commmunity Safety</p>
+        <footer>
+            <p>Developed by Jiaqin Wu (<a href="mailto:JWu@pwcgov.org">JWu@pwcgov.org</a>) and Dr. Tauheeda Yasin (<a href="mailto:tyasin1@pwcgov.org">tyasin1@pwcgov.org</a>)<br>
+            The Office of Community Safety</p>
         </footer>
     """, unsafe_allow_html=True)
 
