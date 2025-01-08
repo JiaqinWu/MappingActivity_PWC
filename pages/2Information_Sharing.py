@@ -136,6 +136,10 @@ def app():
             st.success("Your comment has been submitted and Google Sheets updated.")
         except Exception as e:
             st.error(f"Error updating Google Sheets: {str(e)}")
+    
+
+    st.write("")        
+    st.write("")   
 
 
     with st.expander("See the Results Below"):
