@@ -113,7 +113,7 @@ def app():
 
     # Second Group of Questions
     with st.expander("Submit Your Response -- Community Engagement and Processes"):
-        comment4 = st.text_area("What is your idea on engaging with communities to build resilience?", key="comment4")
+        comment4 = st.text_area("What are your ideas for engaging with communities to build resilience?", key="comment4")
         comment5 = st.text_area("What processes would help us streamline so that everyone is aligned and working together?", key="comment5")
         comment6 = st.text_area("What are your thoughts about information sharing and MOUs?", key="comment6")
         comment7 = st.text_area("What ways can we improve the referral process?", key="comment7")
@@ -129,7 +129,7 @@ def app():
             "What are your ideas for a framework for coordinated response across agencies?": comment1,
             "What is the current state and gaps of inter-agency collaboration (use dashboard to look at which agencies are 'talking')?": comment2,
             "What are the key gaps in the process (prevention, intervention, crisis, post-crisis)?": comment3,
-            "What is your idea on engaging with communities to build resilience?": comment4,
+            "What are your ideas for engaging with communities to build resilience?": comment4,
             "What processes would help us streamline so that everyone is aligned and working together?": comment5,
             "What are your thoughts about information sharing and MOUs?": comment6,
             "What ways can we improve the referral process?": comment7,

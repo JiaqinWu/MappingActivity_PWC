@@ -108,10 +108,9 @@ def app():
 
     # Submit Your Response
     with st.expander("Submit Your Response"):
-        comment1 = st.text_area("What are the six different ways people are currently called into response?", key="comment1")
-        comment2 = st.text_area("Where are the bottlenecks or inefficiencies in the current referral system?", key="comment2")
-        comment3 = st.text_area("How can we ensure that referrals are made with the necessary context and information for all agencies involved?", key="comment3")
-        comment4 = st.text_area("What are the specific roles each agency plays when it comes to referrals?", key="comment4")
+        comment1 = st.text_area("Where are the bottlenecks or inefficiencies in the current referral system?", key="comment1")
+        comment2 = st.text_area("How can we ensure that referrals are made with the necessary context and information for all agencies involved?", key="comment2")
+        comment3 = st.text_area("What is the specific role your agency plays with referrals and how could they be improved?", key="comment3")
 
     # Submit button
     submit_comment = st.button("Submit Comment", key="submit_comment")
@@ -121,10 +120,9 @@ def app():
         new_row = {
             'Name': name,
             'Agency': agency,
-            'What are the six different ways people are currently called into response?': comment1,
-            'Where are the bottlenecks or inefficiencies in the current referral system?': comment2,
-            'How can we ensure that referrals are made with the necessary context and information for all agencies involved?': comment3,
-            "What are the specific roles each agency plays when it comes to referrals?": comment4
+            'Where are the bottlenecks or inefficiencies in the current referral system?': comment1,
+            'How can we ensure that referrals are made with the necessary context and information for all agencies involved?': comment2,
+            "What is the specific role your agency plays with referrals and how could they be improved?": comment3
         }
         new_data = pd.DataFrame([new_row])
 
