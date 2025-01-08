@@ -87,7 +87,7 @@ def app():
     """, unsafe_allow_html=True)
 
     # Use columns for side-by-side layout    
-    col1, col2, col3 = st.columns([3,1,12])
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         st.write(' ')
@@ -106,13 +106,13 @@ def app():
         agency = st.text_area("What is your agency/department?", key="agency")
 
     # First Group of Questions
-    with st.expander("Framework and Collaboration"):
+    with st.expander("Submit Your Response -- Framework and Collaboration"):
         comment1 = st.text_area("What are your ideas for a framework for coordinated response across agencies?", key="comment1")
         comment2 = st.text_area("What is the current state and gaps of inter-agency collaboration (use dashboard to look at which agencies are 'talking')?", key="comment2")
         comment3 = st.text_area("What are the key gaps in the process (prevention, intervention, crisis, post-crisis)?", key="comment3")
 
     # Second Group of Questions
-    with st.expander("Community Engagement and Processes"):
+    with st.expander("Submit Your Response -- Community Engagement and Processes"):
         comment4 = st.text_area("What is your idea on engaging with communities to build resilience?", key="comment4")
         comment5 = st.text_area("What processes would help us streamline so that everyone is aligned and working together?", key="comment5")
         comment6 = st.text_area("What are your thoughts about information sharing and MOUs?", key="comment6")

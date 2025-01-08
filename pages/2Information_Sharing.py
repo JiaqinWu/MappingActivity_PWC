@@ -60,18 +60,9 @@ def app():
     # Set up the Streamlit page
     #st.set_page_config(page_title='PWC Mapping Dashboard', page_icon='', layout='wide')
 
-    # Custom CSS for centering and resizing
+    # Set up custom CSS for styling
     st.markdown("""
         <style>
-            .logo {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-bottom: 20px;
-            }
-            .logo img {
-                width: 300px; /* Adjust size of the logo */
-            }
             .title {
                 text-align: center;
                 font-size: 36px;
@@ -79,12 +70,25 @@ def app():
                 margin-top: 20px;
                 margin-bottom: 40px;
             }
+            .content {
+                font-size: 18px;
+                line-height: 1.6;
+                text-align: justify;
+                margin: 0 auto;
+                max-width: 800px;
+            }
+            footer {
+                text-align: center;
+                margin-top: 50px;
+                font-size: 14px;
+                color: #555;
+            }
         </style>
     """, unsafe_allow_html=True)
 
 
     # Use columns for side-by-side layout    
-    col1, col2, col3 = st.columns([3,1,12])
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         st.write(' ')
@@ -98,38 +102,43 @@ def app():
     # Centered title
     st.markdown('<div class="title">Information Sharing and Data Integration</div>', unsafe_allow_html=True)
 
-    # User inputs
-    with st.expander("Submit Your Response"):
-        # User inputs
+    # Contact Information
+    with st.expander("Contact Information"):
         name = st.text_area("What is your name?", key="name")
         agency = st.text_area("What is your agency/department?", key="agency")
+
+    # Submit Your Response
+    with st.expander("Submit Your Response"):
         comment1 = st.text_area("How do we currently share information between agencies?", key="comment1")
         comment2 = st.text_area("What data needs to be shared across agencies to ensure a coordinated response? What are the limitations on that data sharing?", key="comment2")
         comment3 = st.text_area("How do we ensure that information is timely, secure, and relevant for all parties involved?", key="comment3")
         comment4 = st.text_area("How do we make sure that the information shared leads to actionable next steps, not just monitoring?", key="comment4")
-        submit_comment = st.button("Submit Comment", key="submit_comment")
 
-        if submit_comment:
-            # Prepare the new row
-            new_row = {
-                'Name': name, 
-                'Agency': agency, 
-                'How do we currently share information between agencies?': comment1,
-                'What data needs to be shared across agencies to ensure a coordinated response? What are the limitations on that data sharing?': comment2,
-                'How do we ensure that information is timely, secure, and relevant for all parties involved?': comment3,
-                "How do we make sure that the information shared leads to actionable next steps, not just monitoring?": comment4
-            }
-            new_data = pd.DataFrame([new_row])
+    # Submit button
+    submit_comment = st.button("Submit Comment", key="submit_comment")
 
-            try:
-                # Append new data to Google Sheet
-                updated_sheet = pd.concat([sheet, new_data], ignore_index=True)
-                worksheet1.update([updated_sheet.columns.values.tolist()] + updated_sheet.values.tolist())
-                st.success("Your comment has been submitted and Google Sheets updated.")
-            except Exception as e:
-                st.error(f"Error updating Google Sheets: {str(e)}")
+    if submit_comment:
+        # Prepare the new row
+        new_row = {
+            'Name': name,
+            'Agency': agency,
+            'How do we currently share information between agencies?': comment1,
+            'What data needs to be shared across agencies to ensure a coordinated response? What are the limitations on that data sharing?': comment2,
+            'How do we ensure that information is timely, secure, and relevant for all parties involved?': comment3,
+            "How do we make sure that the information shared leads to actionable next steps, not just monitoring?": comment4
+        }
+        new_data = pd.DataFrame([new_row])
 
-    with st.expander("Check the Results"):
+        try:
+            # Append new data to Google Sheet
+            updated_sheet = pd.concat([sheet, new_data], ignore_index=True)
+            worksheet1.update([updated_sheet.columns.values.tolist()] + updated_sheet.values.tolist())
+            st.success("Your comment has been submitted and Google Sheets updated.")
+        except Exception as e:
+            st.error(f"Error updating Google Sheets: {str(e)}")
+
+
+    with st.expander("See the Results Below"):
         if not sheet.empty:
             st.write("Summary Metrics:")
             col1, col2 = st.columns(2)
