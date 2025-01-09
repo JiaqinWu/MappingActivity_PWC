@@ -105,7 +105,6 @@ def app():
     
     st.image(image1)
 
-    st.write("")
 
     st.markdown(
         """
