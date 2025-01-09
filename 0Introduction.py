@@ -29,7 +29,7 @@ def app():
                 text-align: center;
                 font-size: 36px;
                 font-weight: bold;
-                margin-top: 20px;
+                margin-top: 0px;
                 margin-bottom: 40px;
             }
             .content {
