@@ -107,10 +107,6 @@ def app():
 
     st.write("")
 
-    st.markdown("[Check it in Miro Board](https://miro.com/app/board/uXjVLycezdo=/?share_link_id=611706343038)")
-
-    st.write("")
-
     # Contact Information
     with st.expander("Contact Information"):
         name = st.text_area("What is your name?", key="name")
