@@ -30,7 +30,7 @@ def app():
                 font-size: 36px;
                 font-weight: bold;
                 margin-top: 0px;
-                margin-bottom: 40px;
+                margin-bottom: 20px;
             }
             .content {
                 font-size: 18px;
