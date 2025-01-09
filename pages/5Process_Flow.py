@@ -107,7 +107,17 @@ def app():
 
     st.write("")
 
-    st.markdown("[Check it in Miro Board](https://miro.com/app/board/uXjVLycezdo=/?share_link_id=611706343038)")
+    st.markdown(
+        """
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="https://miro.com/app/board/uXjVLycezdo=/?share_link_id=611706343038" target="_blank" style="text-decoration: none; font-size: 18px; color: blue;">
+                Check it in Miro Board
+            </a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 
     st.write("")
 

@@ -16,7 +16,7 @@ def app():
         st.write(' ')
 
     with col2:
-        st.image(image, width=500)
+        st.image(image, width=800)
 
     with col3:
         st.write(' ')
