@@ -102,8 +102,10 @@ def app():
     st.markdown('<div class="title">Process Flow Map</div>', unsafe_allow_html=True)
 
     st.write("")
-    st.write("")
+    
     st.image(image1)
+
+    st.write("")
 
     # Contact Information
     with st.expander("Contact Information"):
