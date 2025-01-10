@@ -60,6 +60,19 @@ def app():
     # Set up the Streamlit page
     #st.set_page_config(page_title='PWC Mapping Dashboard', page_icon='', layout='wide')
 
+    # Use columns for side-by-side layout    
+    col1, col2, col3 = st.columns([1,3,1])
+
+    with col1:
+        st.write(' ')
+
+    with col2:
+        st.image(image, width=450)
+
+    with col3:
+        st.write(' ')
+
+
     # Set up custom CSS for styling
     st.markdown("""
         <style>
@@ -67,8 +80,8 @@ def app():
                 text-align: center;
                 font-size: 36px;
                 font-weight: bold;
-                margin-top: 20px;
-                margin-bottom: 40px;
+                margin-top: 0px;
+                margin-bottom: 20px;
             }
             .content {
                 font-size: 18px;
@@ -85,19 +98,6 @@ def app():
             }
         </style>
     """, unsafe_allow_html=True)
-
-
-    # Use columns for side-by-side layout    
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.write(' ')
-
-    with col2:
-        st.image(image, width=450)
-
-    with col3:
-        st.write(' ')
         
     # Centered title
     st.markdown('<div class="title">Information Sharing and Data Integration</div>', unsafe_allow_html=True)
