@@ -102,7 +102,7 @@ def app():
     current_slide_number = st.session_state.slide_index + 1
     total_slides = len(slides)
     with col2:
-        st.markdown(f"<h3 style='text-align: center;'>Slide {current_slide_number} of {total_slides}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h3 style='text-align: center;'>Page {current_slide_number} of {total_slides}</h3>", unsafe_allow_html=True)
 
     # Display the current slide
     slide = Image.open(slides[st.session_state.slide_index])
